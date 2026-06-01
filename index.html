@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>SONA AIRBNB UGANDA | Luxury Stays in Major Cities</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700&family=Playfair+Display:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+</head>
+<body class="light-customer-theme">
+    <!-- Top Bar -->
+    <div class="top-bar-full">
+        <div class="currency-section">
+            <span><i class="fas fa-dollar-sign"></i> Currency:</span>
+            <select id="currencySelector">
+                <option value="USD">🇺🇸 USD ($)</option>
+                <option value="UGX">🇺🇬 UGX (Shs)</option>
+                <option value="EUR">🇪🇺 EUR (€)</option>
+                <option value="GBP">🇬🇧 GBP (£)</option>
+            </select>
+            <span class="rate-note"><i class="fas fa-sync-alt"></i> Real-time rates</span>
+        </div>
+        <div class="top-bar-actions">
+            <button id="customerThemeToggle" class="theme-toggle-customer">
+                <i class="fas fa-moon"></i> <span>Dark Mode</span>
+            </button>
+            <a href="admin.html" class="admin-link" target="_blank">
+                <i class="fas fa-user-shield"></i> Admin
+            </a>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <h1>SONA AIRBNB <span>UGANDA</span></h1>
+            </div>
+            <ul class="nav-links" id="nav-links">
+                <li><a href="#" data-page="home" class="active">Home</a></li>
+                <li><a href="#" data-page="gallery">Gallery</a></li>
+                <li><a href="#" data-page="videos">Videos</a></li>
+                <li><a href="#" data-page="prices">Prices</a></li>
+                <li><a href="#" data-page="booking">Book</a></li>
+                <li><a href="#" data-page="mybookings">My Bookings</a></li>
+                <li><a href="#" data-page="profile">Profile</a></li>
+                <li><a href="#" data-page="reviews">Reviews</a></li>
+                <li><a href="#" data-page="contact">Contact</a></li>
+                <li><a href="#" data-page="help">Help</a></li>
+                <li><a href="#" data-page="terms">Terms</a></li>
+            </ul>
+            <div class="auth-buttons">
+                <button id="loginBtn" class="btn-outline">Login</button>
+                <button id="signupBtn" class="btn-primary">Sign Up</button>
+                <span id="userGreeting" class="user-greeting"></span>
+                <button id="logoutBtn" class="btn-logout" style="display:none;">Logout</button>
+            </div>
+            <div class="hamburger" id="hamburger">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </nav>
+
+    <main id="page-content">
+        <!-- HOME PAGE -->
+        <!-- Add a directions button in the features section or hero section -->
+        <div style="text-align: center; margin: 20px 0;">
+            <button class="btn-primary" onclick="openDirectionsModal()">
+                <i class="fas fa-map-marked-alt"></i> Need Directions? Click Here
+            </button>
+        </div>
+        <div id="home-page" class="page active-page">
+            <section class="hero-slideshow">
+                <div class="slideshow-container">
+                    <div class="slide fade"><img src="https://images.pexels.com/photos/1648776/pexels-photo-1648776.jpeg?w=1600&h=600&fit=crop" alt="Luxury bedroom"><div class="slide-caption">Luxurious King Suite - Kampala</div></div>
+                    <div class="slide fade"><img src="https://images.pexels.com/photos/258154/pexels-photo-258154.jpeg?w=1600&h=600&fit=crop" alt="Modern living room"><div class="slide-caption">Spacious Living Area - Jinja</div></div>
+                    <div class="slide fade"><img src="https://images.pexels.com/photos/1454806/pexels-photo-1454806.jpeg?w=1600&h=600&fit=crop" alt="Swimming pool"><div class="slide-caption">Infinity Pool - Entebbe</div></div>
+                    <div class="slide fade"><img src="https://images.pexels.com/photos/260922/pexels-photo-260922.jpeg?w=1600&h=600&fit=crop" alt="Pool table"><div class="slide-caption">Pool Table & Games Room</div></div>
+                    <div class="slide fade"><img src="https://images.pexels.com/photos/1190298/pexels-photo-1190298.jpeg?w=1600&h=600&fit=crop" alt="Bar"><div class="slide-caption">Sky Bar with City View</div></div>
+                    <a class="prev" onclick="changeSlide(-1)">&#10094;</a>
+                    <a class="next" onclick="changeSlide(1)">&#10095;</a>
+                </div>
+                <div class="hero-text">
+                    <h2>Experience Uganda Like Never Before</h2>
+                    <p>Premium Airbnbs in Kampala, Jinja, Entebbe, Mbarara, Gulu & more</p>
+                    <button class="btn-large" data-page="booking">Book Your Stay Now</button>
+                </div>
+            </section>
+            <section class="features">
+                <div class="feature-card"><i class="fas fa-map-marker-alt"></i><h3>7+ Cities</h3><p>Across Uganda</p></div>
+                <div class="feature-card"><i class="fas fa-wifi"></i><h3>Free High-Speed WiFi</h3></div>
+                <div class="feature-card"><i class="fas fa-concierge-bell"></i><h3>24/7 Support</h3></div>
+                <div class="feature-card"><i class="fas fa-shield-alt"></i><h3>Verified Properties</h3></div>
+                <div class="feature-card"><i class="fas fa-swimming-pool"></i><h3>Swimming Pools</h3></div>
+                <div class="feature-card"><i class="fas fa-glass-cheers"></i><h3>On-site Bars</h3></div>
+            </section>
+        </div>
+
+        <!-- GALLERY PAGE -->
+        <div id="gallery-page" class="page">
+            <h2 class="page-title">Our Properties - 360° View</h2>
+            <div class="gallery-grid">
+                <div class="gallery-item"><img src="https://images.pexels.com/photos/1648776/pexels-photo-1648776.jpeg?w=400&h=300&fit=crop" alt="Master bedroom"><span>Master Suite - Kampala</span></div>
+                <div class="gallery-item"><img src="https://images.pexels.com/photos/271618/pexels-photo-271618.jpeg?w=400&h=300&fit=crop" alt="Guest bedroom"><span>Guest Room - Jinja</span></div>
+                <div class="gallery-item"><img src="https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?w=400&h=300&fit=crop" alt="Bed with balcony"><span>Balcony Room - Entebbe</span></div>
+                <div class="gallery-item"><img src="https://images.pexels.com/photos/279746/pexels-photo-279746.jpeg?w=400&h=300&fit=crop" alt="Cozy bedroom"><span>Cozy Room - Gulu</span></div>
+                <div class="gallery-item"><img src="https://images.pexels.com/photos/1454806/pexels-photo-1454806.jpeg?w=400&h=300&fit=crop" alt="Infinity pool"><span>Infinity Pool - Kampala</span></div>
+                <div class="gallery-item"><img src="https://images.pexels.com/photos/258154/pexels-photo-258154.jpeg?w=400&h=300&fit=crop" alt="Pool loungers"><span>Pool Area - Entebbe</span></div>
+                <div class="gallery-item"><img src="https://images.pexels.com/photos/260922/pexels-photo-260922.jpeg?w=400&h=300&fit=crop" alt="Pool table"><span>Pool Table - Kampala</span></div>
+                <div class="gallery-item"><img src="https://images.pexels.com/photos/1190298/pexels-photo-1190298.jpeg?w=400&h=300&fit=crop" alt="Sky bar"><span>Sky Bar - Kampala</span></div>
+                <div class="gallery-item"><img src="https://images.pexels.com/photos/1571467/pexels-photo-1571467.jpeg?w=400&h=300&fit=crop" alt="Garden"><span>Garden View - Mbarara</span></div>
+                <div class="gallery-item"><img src="https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg?w=400&h=300&fit=crop" alt="Exterior"><span>Building Exterior</span></div>
+                <div class="gallery-item"><img src="https://images.pexels.com/photos/1457842/pexels-photo-1457842.jpeg?w=400&h=300&fit=crop" alt="Bathroom"><span>Spa Bathroom</span></div>
+                <div class="gallery-item"><img src="https://images.pexels.com/photos/206172/pexels-photo-206172.jpeg?w=400&h=300&fit=crop" alt="Kitchen"><span>Modern Kitchen</span></div>
+            </div>
+            <!-- Example gallery item with price -->
+<div class="gallery-item">
+    <img src="https://images.pexels.com/photos/1648776/pexels-photo-1648776.jpeg?w=400&h=300&fit=crop" alt="Master bedroom">
+    <span>Master Suite - Kampala</span>
+    <div class="gallery-price">$85/night</div>
+</div>
+        </div>
+
+        <!-- VIDEOS PAGE -->
+        <div id="videos-page" class="page">
+            <h2 class="page-title">Video Tours - Interior Walkthroughs</h2>
+            <div class="video-grid">
+                <div class="video-card"><iframe src="https://www.youtube.com/embed/GtL1huin9EE" frameborder="0" allowfullscreen></iframe><p>Kampala Executive Suite</p></div>
+                <div class="video-card"><iframe src="https://www.youtube.com/embed/zP0VhhDz8dQ" frameborder="0" allowfullscreen></iframe><p>Jinja Riverside Villa</p></div>
+                <div class="video-card"><iframe src="https://www.youtube.com/embed/Y7eBtzCjM4E" frameborder="0" allowfullscreen></iframe><p>Entebbe Lakefront Room</p></div>
+                <div class="video-card"><iframe src="https://www.youtube.com/embed/Nc1ePFRXR_Q" frameborder="0" allowfullscreen></iframe><p>Mbarara Modern Studio</p></div>
+            </div>
+        </div>
+
+        <!-- PRICES PAGE -->
+        <div id="prices-page" class="page">
+            <h2 class="page-title">Prices per Night</h2>
+            <div class="price-table">
+                <div class="price-item" data-usd="85">Kampala - Executive Suite: <span class="price-value">$85</span></div>
+                <div class="price-item" data-usd="70">Jinja - Riverside Cottage: <span class="price-value">$70</span></div>
+                <div class="price-item" data-usd="95">Entebbe - Airport Penthouse: <span class="price-value">$95</span></div>
+                <div class="price-item" data-usd="55">Mbarara - Modern Studio: <span class="price-value">$55</span></div>
+                <div class="price-item" data-usd="45">Gulu - Peace Haven: <span class="price-value">$45</span></div>
+                <div class="price-item" data-usd="65">Fort Portal - Cottage: <span class="price-value">$65</span></div>
+            </div>
+            <div class="cancellation-policy">
+                <h3><i class="fas fa-calendar-times"></i> Cancellation Policy</h3>
+                <p>✅ Free cancellation up to 7 days before check-in<br>⚠️ 50% refund up to 48 hours before check-in<br>❌ No refund within 48 hours</p>
+            </div>
+        </div>
+
+        <!-- BOOKING PAGE -->
+        <div id="booking-page" class="page">
+            <h2 class="page-title">Book Your Dream Stay</h2>
+            <form id="bookingForm">
+                <input type="text" id="fullName" placeholder="Full Name" required>
+                <input type="email" id="email" placeholder="Email Address" required>
+                <input type="tel" id="phone" placeholder="Phone Number" required>
+                <select id="city" required>
+                    <option value="">Select Property</option>
+                    <option value="Kampala Executive Suite">Kampala - Executive Suite ($85/night)</option>
+                    <option value="Jinja Riverside Cottage">Jinja - Riverside Cottage ($70/night)</option>
+                    <option value="Entebbe Airport Penthouse">Entebbe - Airport Penthouse ($95/night)</option>
+                    <option value="Mbarara Modern Studio">Mbarara - Modern Studio ($55/night)</option>
+                    <option value="Gulu Peace Haven">Gulu - Peace Haven ($45/night)</option>
+                </select>
+                <input type="date" id="checkin" required>
+                <input type="date" id="checkout" required>
+                <select id="guests">
+                    <option value="1">1 Guest</option><option value="2">2 Guests</option>
+                    <option value="3">3 Guests</option><option value="4">4 Guests</option>
+                </select>
+                <div class="price-breakdown" id="priceBreakdown" style="display:none;">
+                    <h4>Price Breakdown</h4>
+                    <p>Nightly rate: <span id="nightlyRate">$0</span></p>
+                    <p>Cleaning fee: <span id="cleaningFee">$15</span></p>
+                    <p>Service fee (10%): <span id="serviceFee">$0</span></p>
+                    <p>Tax (18% VAT): <span id="tax">$0</span></p>
+                    <p><strong>Total: <span id="totalPrice">$0</span></strong></p>
+                </div>
+                <div class="payment-section">
+                    <h4>Payment Information</h4>
+                    <div class="payment-methods">
+                        <label><input type="radio" name="payment" value="Credit Card" checked> Credit Card</label>
+                        <label><input type="radio" name="payment" value="MTN Mobile Money"> MTN MoMo</label>
+                        <label><input type="radio" name="payment" value="Airtel Money"> Airtel Money</label>
+                    </div>
+                    <div id="creditCardForm">
+                        <input type="text" id="cardNumber" placeholder="Card Number" maxlength="19">
+                        <div class="card-row">
+                            <input type="text" id="cardExpiry" placeholder="MM/YY" maxlength="5">
+                            <input type="text" id="cardCVC" placeholder="CVC" maxlength="4">
+                        </div>
+                        <input type="text" id="cardName" placeholder="Name on Card">
+                    </div>
+                </div>
+                <div id="specialRequests">
+                    <textarea placeholder="Special requests (early check-in, airport pickup...)" rows="2"></textarea>
+                </div>
+                <button type="submit" class="btn-primary">Complete Booking & Pay</button>
+            </form>
+        </div>
+
+        <!-- MY BOOKINGS PAGE -->
+        <div id="mybookings-page" class="page">
+            <h2 class="page-title">My Bookings</h2>
+            <div id="userBookingsList" class="bookings-list"></div>
+        </div>
+
+        <!-- PROFILE PAGE -->
+        <div id="profile-page" class="page">
+            <h2 class="page-title">My Profile</h2>
+            <div class="profile-container">
+                <div class="profile-photo-section">
+                    <div id="profilePhotoPreview" class="profile-photo-preview"><i class="fas fa-user-circle"></i></div>
+                    <input type="file" id="profilePhotoUpload" accept="image/*" style="display:none;">
+                    <button id="uploadPhotoBtn" class="btn-secondary">Upload Photo</button>
+                </div>
+                <div class="profile-info">
+                    <input type="text" id="profileName" placeholder="Full Name">
+                    <input type="email" id="profileEmail" placeholder="Email">
+                    <input type="tel" id="profilePhone" placeholder="Phone">
+                    <textarea id="profileBio" placeholder="Bio" rows="2"></textarea>
+                    <button id="saveProfileBtn" class="btn-primary">Save Changes</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- REVIEWS PAGE -->
+        <div id="reviews-page" class="page">
+            <h2 class="page-title">Guest Reviews</h2>
+            <div class="review-stats"><span class="big-rating">4.8</span><span class="stars">★★★★★</span><span>156 reviews</span></div>
+            <div class="review-list" id="reviewList"></div>
+            <textarea id="newReview" placeholder="Share your experience..."></textarea>
+            <button id="submitReviewBtn" class="btn-primary">Submit Review</button>
+        </div>
+
+        <!-- CONTACT PAGE -->
+        <div id="contact-page" class="page">
+            <h2 class="page-title">Contact Us</h2>
+            <div class="contact-info">
+                <p><i class="fab fa-whatsapp"></i> WhatsApp: <a href="https://wa.me/256791825920">0791825920</a></p>
+                <p><i class="fas fa-phone-alt"></i> Calls: 0744824491</p>
+                <p><i class="fas fa-envelope"></i> Email: sophianalubiri@gmail.com</p>
+            </div>
+            <div id="locationMap" style="height: 400px; border-radius: 20px;"></div>
+        </div>
+        <!-- Add this button to the contact page -->
+<div style="text-align: center; margin: 20px 0;">
+    <button class="btn-primary" onclick="openDirectionsModal()" style="font-size: 16px; padding: 12px 25px;">
+        <i class="fas fa-map-marked-alt"></i> Get Directions to Properties
+    </button>
+</div>
+
+<!-- HELP PAGE - COMPLETE WITH ALL FAQS AND ANSWERS -->
+<div id="help-page" class="page">
+    <h2 class="page-title">Help & FAQs</h2>
+    
+    <div class="faq-search" style="margin-bottom: 30px; text-align: center;">
+        <input type="text" id="faqSearch" placeholder="🔍 Search FAQs..." style="width: 100%; max-width: 500px; padding: 12px 20px; border-radius: 30px; border: 1px solid var(--border-color); background: var(--bg-primary); color: var(--text-primary);">
+    </div>
+    
+    <div class="faq-categories" style="display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; margin-bottom: 30px;">
+        <button class="faq-cat-btn active" data-cat="all">All Questions</button>
+        <button class="faq-cat-btn" data-cat="booking">📅 Booking</button>
+        <button class="faq-cat-btn" data-cat="payment">💰 Payment</button>
+        <button class="faq-cat-btn" data-cat="cancellation">❌ Cancellation</button>
+        <button class="faq-cat-btn" data-cat="property">🏠 Property</button>
+        <button class="faq-cat-btn" data-cat="safety">🛡️ Safety</button>
+    </div>
+    
+    <div class="faq-container">
+        
+        <!-- ==================== BOOKING FAQs ==================== -->
+        <div class="faq-item" data-cat="booking">
+            <h3>📅 How do I make a booking? <i class="fas fa-chevron-down"></i></h3>
+            <div class="faq-answer">
+                <p><strong>Making a booking is easy! Follow these steps:</strong></p>
+                <ol>
+                    <li><strong>Login or Sign up</strong> for an account (top right corner)</li>
+                    <li>Go to the <strong>"Book" page</strong> from the navigation menu</li>
+                    <li><strong>Select your preferred property</strong> and city from the dropdown</li>
+                    <li><strong>Choose your check-in and check-out dates</strong> (minimum 1 night)</li>
+                    <li><strong>Enter number of guests</strong> (maximum varies by property)</li>
+                    <li><strong>Review the price breakdown</strong> (nightly rate, cleaning fee, service fee, tax)</li>
+                    <li><strong>Select payment method</strong> (Credit Card, MTN MoMo, or Airtel Money)</li>
+                    <li><strong>Enter payment details</strong> (card number, expiry, CVC for credit cards)</li>
+                    <li><strong>Click "Complete Booking & Pay"</strong></li>
+                    <li><strong>You will receive a confirmation</strong> via WhatsApp and Email with your unique Booking ID</li>
+                </ol>
+                <p>You can view all your bookings in the <strong>"My Bookings"</strong> section. Need help? Contact us on WhatsApp: 0791825920</p>
+            </div>
+        </div>
+        
+        <div class="faq-item" data-cat="booking">
+            <h3>🔑 What do I need to check-in? <i class="fas fa-chevron-down"></i></h3>
+            <div class="faq-answer">
+                <p><strong>For check-in, please bring the following:</strong></p>
+                <ul>
+                    <li><strong>🪪 Valid ID/Passport</strong> (for identification - required for all guests)</li>
+                    <li><strong>📱 Booking confirmation</strong> (digital or printed copy of your Booking ID)</li>
+                    <li><strong>💰 Security deposit</strong> ($50 USD) - can be paid in cash or card</li>
+                    <li><strong>📝 Any special request confirmations</strong> (airport pickup, early check-in, etc.)</li>
+                </ul>
+                <p><strong>Check-in time:</strong> 2:00 PM (14:00)<br>
+                <strong>Early check-in:</strong> Available from 10:00 AM for $20 (subject to availability)<br>
+                <strong>Late check-in:</strong> Available 24/7 with prior arrangement</p>
+                <p>Please contact us at least 24 hours before arrival if you will be checking in outside normal hours.</p>
+            </div>
+        </div>
+        
+        <div class="faq-item" data-cat="booking">
+            <h3>⏰ What are check-in and check-out times? <i class="fas fa-chevron-down"></i></h3>
+            <div class="faq-answer">
+                <p><strong>Standard Times:</strong></p>
+                <ul>
+                    <li><strong>Check-in:</strong> 2:00 PM (14:00)</li>
+                    <li><strong>Check-out:</strong> 11:00 AM (11:00)</li>
+                </ul>
+                <p><strong>Early Check-in:</strong></p>
+                <ul>
+                    <li>Available from 10:00 AM for <strong>$20</strong></li>
+                    <li>Subject to availability (room must be ready)</li>
+                    <li>Request at least 24 hours in advance</li>
+                </ul>
+                <p><strong>Late Check-out:</strong></p>
+                <ul>
+                    <li>Available until 2:00 PM for <strong>$20</strong></li>
+                    <li>Subject to availability (no incoming bookings)</li>
+                    <li>Request by 9:00 AM on check-out day</li>
+                </ul>
+                <p><strong>Luggage Storage:</strong> Free before check-in and after check-out</p>
+                <p>Late check-out without approval will incur a charge of $50.</p>
+            </div>
+        </div>
+        
+        <div class="faq-item" data-cat="booking">
+            <h3>👥 What is the maximum occupancy? <i class="fas fa-chevron-down"></i></h3>
+            <div class="faq-answer">
+                <p><strong>Maximum guests per property:</strong></p>
+                <ul>
+                    <li><strong>Kampala Executive Suite:</strong> 4 guests</li>
+                    <li><strong>Jinja Riverside Cottage:</strong> 6 guests</li>
+                    <li><strong>Entebbe Airport Penthouse:</strong> 5 guests</li>
+                    <li><strong>Mbarara Modern Studio:</strong> 3 guests</li>
+                    <li><strong>Gulu Peace Haven:</strong> 4 guests</li>
+                </ul>
+                <p>⚠️ Exceeding the maximum occupancy without prior approval will result in:</p>
+                <ul>
+                    <li>Additional $50 per extra guest per night</li>
+                    <li>Possible cancellation of booking without refund</li>
+                </ul>
+                <p>Children under 2 years stay free. Extra beds available for $20 per night.</p>
+            </div>
+        </div>
+        
+        <!-- ==================== PAYMENT FAQs ==================== -->
+        <div class="faq-item" data-cat="payment">
+            <h3>💰 What payment methods do you accept? <i class="fas fa-chevron-down"></i></h3>
+            <div class="faq-answer">
+                <p><strong>We accept the following payment methods:</strong></p>
+                <ul>
+                    <li><strong>💳 Credit/Debit Cards:</strong> Visa, Mastercard, American Express (secure online payment)</li>
+                    <li><strong>📱 MTN Mobile Money:</strong> Pay directly from your MTN account using MoMo</li>
+                    <li><strong>📱 Airtel Money:</strong> Pay directly from your Airtel account</li>
+                    <li><strong>💵 Cash:</strong> Accepted at check-in (USD or UGX at current exchange rate)</li>
+                    <li><strong>🏦 Bank Transfer:</strong> Available for corporate bookings (contact us for details)</li>
+                </ul>
+                <p><strong>Important Notes:</strong></p>
+                <ul>
+                    <li>All online payments are 100% secure and encrypted</li>
+                    <li>Currency conversion fees may apply for international cards</li>
+                    <li>Payments are processed in USD, UGX, EUR, or GBP (select your preferred currency at the top of the website)</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="faq-item" data-cat="payment">
+            <h3>💵 Is there a security deposit? <i class="fas fa-chevron-down"></i></h3>
+            <div class="faq-answer">
+                <p><strong>Yes, a security deposit of $50 USD is required at check-in.</strong></p>
+                <p><strong>What it covers:</strong></p>
+                <ul>
+                    <li>Damaged furniture, appliances, or fixtures</li>
+                    <li>Missing items (towels, linens, electronics, remote controls, etc.)</li>
+                    <li>Excessive cleaning required beyond normal use</li>
+                    <li>Violation of house rules (smoking inside, unauthorized guests, etc.)</li>
+                </ul>
+                <p><strong>Refund Process:</strong></p>
+                <ul>
+                    <li>Deposit is fully refundable at check-out after room inspection</li>
+                    <li>Refunds processed within 7 business days</li>
+                    <li>Refund sent via same payment method used for deposit</li>
+                    <li>Itemized deductions will be provided if any damages found</li>
+                </ul>
+                <p>If no damages or issues are found, you will receive your full deposit back.</p>
+            </div>
+        </div>
+        
+        <div class="faq-item" data-cat="payment">
+            <h3>💱 What currencies can I pay in? <i class="fas fa-chevron-down"></i></h3>
+            <div class="faq-answer">
+                <p><strong>You can pay in four different currencies:</strong></p>
+                <ul>
+                    <li><strong>🇺🇸 USD ($)</strong> - US Dollars</li>
+                    <li><strong>🇺🇬 UGX (Shs)</strong> - Ugandan Shillings</li>
+                    <li><strong>🇪🇺 EUR (€)</strong> - Euros</li>
+                    <li><strong>🇬🇧 GBP (£)</strong> - British Pounds</li>
+                </ul>
+                <p><strong>How to change currency:</strong></p>
+                <ul>
+                    <li>Look at the top bar of the website</li>
+                    <li>Click on the currency selector dropdown</li>
+                    <li>Select your preferred currency</li>
+                    <li>All prices will automatically update</li>
+                </ul>
+                <p>Exchange rates are updated daily. If paying in cash at check-in, local currency is accepted at the current exchange rate.</p>
+            </div>
+        </div>
+        
+        <!-- ==================== CANCELLATION FAQs ==================== -->
+        <div class="faq-item" data-cat="cancellation">
+            <h3>❌ What is your cancellation policy? <i class="fas fa-chevron-down"></i></h3>
+            <div class="faq-answer">
+                <p><strong>Cancellation Policy (based on days before check-in):</strong></p>
+                <ul>
+                    <li>✅ <strong>Free cancellation</strong> - More than 7 days before check-in: <strong>100% refund</strong></li>
+                    <li>⚠️ <strong>50% refund</strong> - 2 to 7 days before check-in: <strong>50% refund</strong></li>
+                    <li>❌ <strong>No refund</strong> - Less than 48 hours before check-in: <strong>0% refund</strong></li>
+                    <li>💰 <strong>$25 cancellation fee</strong> applies to ALL cancellations</li>
+                </ul>
+                <p><strong>How to cancel:</strong></p>
+                <ol>
+                    <li>Go to <strong>"My Bookings"</strong> page</li>
+                    <li>Find the booking you want to cancel</li>
+                    <li>Click the <strong>"Cancel Booking"</strong> button</li>
+                    <li>Confirm cancellation</li>
+                    <li>You will receive a cancellation confirmation via email/WhatsApp</li>
+                </ol>
+                <p><strong>No-shows:</strong> If you do not show up without prior cancellation, no refund will be issued.</p>
+            </div>
+        </div>
+        
+        <div class="faq-item" data-cat="cancellation">
+            <h3>🔄 Can I modify my booking dates? <i class="fas fa-chevron-down"></i></h3>
+            <div class="faq-answer">
+                <p><strong>Yes, you can modify your booking dates subject to availability.</strong></p>
+                <p><strong>How to request date changes:</strong></p>
+                <ul>
+                    <li>Contact us at least <strong>48 hours before check-in</strong></li>
+                    <li>Call/WhatsApp: <strong>0744824491</strong> or <strong>0791825920</strong></li>
+                    <li>Email: <strong>sophianalubiri@gmail.com</strong></li>
+                </ul>
+                <p><strong>Date change fees:</strong></p>
+                <ul>
+                    <li>Free if requested 7+ days before check-in</li>
+                    <li>$20 fee if requested 2-7 days before check-in</li>
+                    <li>Not allowed within 48 hours of check-in</li>
+                    <li>Any price difference for new dates will be charged or refunded</li>
+                </ul>
+                <p>Date changes are subject to room availability for the new dates.</p>
+            </div>
+        </div>
+        
+        <!-- ==================== PROPERTY FAQs ==================== -->
+        <div class="faq-item" data-cat="property">
+            <h3>🏠 What amenities are included? <i class="fas fa-chevron-down"></i></h3>
+            <div class="faq-answer">
+                <p><strong>All our properties include these standard amenities:</strong></p>
+                <ul>
+                    <li>🛏️ Premium bedding, pillows, and linens</li>
+                    <li>📶 <strong>Free High-Speed WiFi</strong> (up to 100 Mbps)</li>
+                    <li>❄️ Air conditioning / Heating</li>
+                    <li>📺 55" Smart TV with Netflix, YouTube, and streaming services</li>
+                    <li>🍳 Fully equipped kitchen (stove, fridge, microwave, utensils, pots, pans)</li>
+                    <li>☕ Coffee maker with free coffee and tea</li>
+                    <li>🧺 Washing machine and ironing facilities</li>
+                    <li>🚿 Hot water 24/7</li>
+                    <li>🧴 Complimentary toiletries (shampoo, body wash, lotion)</li>
+                    <li>👕 Towels and bathrobes</li>
+                    <li>🔒 Secure parking (gated with security)</li>
+                    <li>🔐 In-room safe for valuables</li>
+                </ul>
+                <p><strong>Select properties also feature:</strong></p>
+                <ul>
+                    <li>🏊 Swimming pool</li>
+                    <li>🎱 Pool table / Games room</li>
+                    <li>🍹 On-site bar</li>
+                    <li>🌳 Garden / Patio area</li>
+                    <li>💪 Fitness center</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="faq-item" data-cat="property">
+            <h3>📍 Where are your properties located? <i class="fas fa-chevron-down"></i></h3>
+            <div class="faq-answer">
+                <p><strong>Our properties are located in major cities across Uganda:</strong></p>
+                <ul>
+                    <li><strong>🏙️ Kampala:</strong> Plot 23, Kololo Heights, Kampala (near Acacia Mall)</li>
+                    <li><strong>🌊 Jinja:</strong> Riverside Drive, Near Source of the Nile, Jinja</li>
+                    <li><strong>✈️ Entebbe:</strong> Church Road, Entebbe (5 minutes from Entebbe International Airport)</li>
+                    <li><strong>🏥 Mbarara:</strong> High Street, Mbarara Central (near Mbarara Regional Hospital)</li>
+                    <li><strong>🕊️ Gulu:</strong> Pece Stadium Road, Gulu City (peaceful residential area)</li>
+                    <li><strong>🏔️ Fort Portal:</strong> Crater Lake Road, Fort Portal (near Kibale National Park)</li>
+                    <li><strong>⛰️ Mbale:</strong> Wash & Wills Road, Mbale (views of Mt. Elgon)</li>
+                </ul>
+                <p><strong>View exact locations:</strong> Go to the <strong>Contact page</strong> for an interactive map with all property pins. You can also click "Get Directions" on any booking confirmation.</p>
+            </div>
+        </div>
+        
+        <div class="faq-item" data-cat="property">
+            <h3>🧹 Is cleaning included? <i class="fas fa-chevron-down"></i></h3>
+            <div class="faq-answer">
+                <p><strong>Yes! Professional cleaning is included in your booking.</strong></p>
+                <p><strong>Cleaning Fee:</strong> $15 per booking (covers pre-arrival and post-departure cleaning)</p>
+                <p><strong>During your stay:</strong></p>
+                <ul>
+                    <li>For stays of <strong>7+ nights</strong>: Free mid-stay cleaning and linen change</li>
+                    <li>For stays of <strong>14+ nights</strong>: Free weekly cleaning</li>
+                    <li>Extra cleaning: Available upon request for $20 per session</li>
+                </ul>
+                <p><strong>What's included in cleaning:</strong></p>
+                <ul>
+                    <li>Changing bed linens and towels</li>
+                    <li>Vacuuming and mopping floors</li>
+                    <li>Cleaning bathrooms and kitchen</li>
+                    <li>Dusting and sanitizing surfaces</li>
+                    <li>Trash removal</li>
+                </ul>
+                <p>Please keep the property reasonably clean during your stay. Excessive mess may result in additional cleaning charges.</p>
+            </div>
+        </div>
+        
+        <div class="faq-item" data-cat="property">
+            <h3>🚗 Is parking available? <i class="fas fa-chevron-down"></i></h3>
+            <div class="faq-answer">
+                <p><strong>Yes, free secure parking is available at all properties.</strong></p>
+                <ul>
+                    <li><strong>Kampala:</strong> Underground secured parking (24/7 security)</li>
+                    <li><strong>Jinja:</strong> Gated compound parking</li>
+                    <li><strong>Entebbe:</strong> Private driveway parking</li>
+                    <li><strong>Mbarara:</strong> Street parking with security guard</li>
+                    <li><strong>Gulu:</strong> Secure compound parking</li>
+                </ul>
+                <p><strong>Parking Features:</strong></p>
+                <ul>
+                    <li>24/7 CCTV surveillance</li>
+                    <li>Security guards on duty</li>
+                    <li>Well-lit parking areas</li>
+                    <li>Space for up to 2 vehicles per booking</li>
+                </ul>
+                <p>For large vehicles or trailers, please contact us in advance to confirm space availability.</p>
+            </div>
+        </div>
+        
+        <!-- ==================== SAFETY FAQs ==================== -->
+        <div class="faq-item" data-cat="safety">
+            <h3>🛡️ Is the property secure? <i class="fas fa-chevron-down"></i></h3>
+            <div class="faq-answer">
+                <p><strong>Your safety is our top priority! All properties feature:</strong></p>
+                <ul>
+                    <li>👮 <strong>24/7 Security guards</strong> on-site at all locations</li>
+                    <li>📹 <strong>CCTV cameras</strong> monitoring all common areas, entrances, and parking</li>
+                    <li>🔒 <strong>Secure electronic door locks</strong> with unique codes per guest</li>
+                    <li>💰 <strong>In-room digital safes</strong> for valuables (free to use)</li>
+                    <li>💡 <strong>Well-lit pathways and parking areas</strong></li>
+                    <li>🔥 <strong>Fire extinguishers and smoke detectors</strong> in every room and hallway</li>
+                    <li>🚪 <strong>Emergency exits clearly marked</strong> with evacuation maps</li>
+                    <li>🆔 <strong>Guest identification required</strong> at check-in for all visitors</li>
+                    <li>🚫 <strong>Restricted access</strong> - only registered guests can enter after 10 PM</li>
+                </ul>
+                <p>We are located in safe, upscale neighborhoods in each city. Security is taken very seriously.</p>
+            </div>
+        </div>
+        
+        <div class="faq-item" data-cat="safety">
+            <h3>🚑 What if there's an emergency? <i class="fas fa-chevron-down"></i></h3>
+            <div class="faq-answer">
+                <p><strong>Emergency contacts - save these numbers:</strong></p>
+                <ul>
+                    <li><strong>🏨 SONA 24/7 Emergency Hotline:</strong> +256 700 123 456</li>
+                    <li><strong>🚓 Police:</strong> 999</li>
+                    <li><strong>🚑 Ambulance:</strong> 911</li>
+                    <li><strong>🔥 Fire Brigade:</strong> 112</li>
+                </ul>
+                <p><strong>On-site emergency procedures:</strong></p>
+                <ul>
+                    <li>Each room has an <strong>emergency information card</strong> on the back of the door</li>
+                    <li>Includes: evacuation routes, meeting point location, and nearest hospital contacts</li>
+                    <li><strong>Nearest hospitals:</strong> Listed on the emergency card in your room</li>
+                    <li>Security guards are trained in first aid and emergency response</li>
+                </ul>
+                <p><strong>Medical emergencies:</strong> Contact the front desk immediately (dial 0 from room phone). Security will assist and arrange transport to the nearest hospital if needed.</p>
+            </div>
+        </div>
+        
+        <div class="faq-item" data-cat="safety">
+            <h3>🩺 What about health and hygiene? <i class="fas fa-chevron-down"></i></h3>
+            <div class="faq-answer">
+                <p><strong>We maintain the highest standards of cleanliness and hygiene:</strong></p>
+                <ul>
+                    <li>🧼 Enhanced cleaning protocols following international standards</li>
+                    <li>🧴 Hand sanitizer stations available in all common areas and at reception</li>
+                    <li>🧹 Professional cleaning between each guest stay</li>
+                    <li>🧽 High-touch surfaces (door handles, switches, remotes) disinfected daily</li>
+                    <li>🛏️ Linens and towels washed at high temperatures (60°C+)</li>
+                    <li>😷 Staff trained in hygiene protocols and wear PPE when required</li>
+                    <li>📱 Contactless check-in and check-out available</li>
+                    <li>💨 Ventilated common areas with proper air circulation</li>
+                </ul>
+                <p>If you have any specific health concerns, please contact us before your arrival.</p>
+            </div>
+        </div>
+        
+        <!-- ==================== CONTACT FAQ ==================== -->
+        <div class="faq-item" data-cat="booking">
+            <h3>📞 How do I contact support? <i class="fas fa-chevron-down"></i></h3>
+            <div class="faq-answer">
+                <p><strong>We're here to help 24/7! Contact us through any of these channels:</strong></p>
+                <ul>
+                    <li><strong>💬 WhatsApp (Fastest):</strong> <a href="https://wa.me/256791825920" target="_blank">0791825920</a> - Response within 5-10 minutes</li>
+                    <li><strong>📞 Phone/Calls:</strong> <a href="tel:+256744824491">0744824491</a> - Available 24/7</li>
+                    <li><strong>📧 Email:</strong> <a href="mailto:sophianalubiri@gmail.com">sophianalubiri@gmail.com</a> - Response within 2 hours</li>
+                    <li><strong>💬 Live Chat:</strong> Use the chatbot at the bottom right corner of the website</li>
+                    <li><strong>📍 In person:</strong> Visit our office at Plot 23, Kololo Heights, Kampala (9 AM - 5 PM weekdays)</li>
+                </ul>
+                <p><strong>What to have ready when contacting us:</strong></p>
+                <ul>
+                    <li>Your Booking ID (if you have one)</li>
+                    <li>Your full name and phone number</li>
+                    <li>Property name and dates of stay</li>
+                    <li>A clear description of your question or issue</li>
+                </ul>
+                <p>We aim to respond to all inquiries within 15 minutes during business hours (6 AM - 10 PM) and within 1 hour overnight.</p>
+            </div>
+        </div>
+        
+        <div class="faq-item" data-cat="booking">
+            <h3>✈️ Do you offer airport pickup? <i class="fas fa-chevron-down"></i></h3>
+            <div class="faq-answer">
+                <p><strong>Yes! We offer airport pickup service for your convenience.</strong></p>
+                <p><strong>Airport Transfer Service:</strong></p>
+                <ul>
+                    <li>🚗 Cost: <strong>$20 USD per trip</strong> (up to 4 people)</li>
+                    <li>🛬 Pickup at: Entebbe International Airport (EBB)</li>
+                    <li>👨‍✈️ Professional driver will meet you at arrivals with a sign</li>
+                    <li>💺 Comfortable, air-conditioned vehicle</li>
+                    <li>🧳 Assistance with luggage included</li>
+                </ul>
+                <p><strong>How to request airport pickup:</strong></p>
+                <ol>
+                    <li>When making your booking, add a note in the "Special Requests" section</li>
+                    <li>Or contact us at least <strong>24 hours before arrival</strong> via WhatsApp: 0791825920</li>
+                    <li>Provide your flight number, arrival time, and number of passengers</li>
+                    <li>Payment can be made at check-in or added to your booking total</li>
+                </ol>
+                <p>For larger groups (5+ people), please contact us for a custom quote.</p>
+            </div>
+        </div>
+        
+    </div>
+    
+    <div class="help-contact-banner" style="background: rgba(255,179,71,0.15); padding: 30px; border-radius: 20px; text-align: center; margin-top: 30px;">
+        <h3 style="color: var(--primary);">Still need help? 🤝</h3>
+        <p>Our support team is available 24/7 to assist you with any questions or concerns.</p>
+        <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; margin-top: 15px;">
+            <a href="https://wa.me/256791825920" class="btn-primary" style="text-decoration: none; display: inline-flex; align-items: center; gap: 8px;">
+                <i class="fab fa-whatsapp"></i> WhatsApp Us
+            </a>
+            <button class="btn-primary" onclick="openDirectionsModal()" style="display: inline-flex; align-items: center; gap: 8px;">
+                <i class="fas fa-map-marked-alt"></i> Get Directions
+            </button>
+            <button class="btn-primary" onclick="openHumanSupportModal()" style="display: inline-flex; align-items: center; gap: 8px;">
+                <i class="fas fa-headset"></i> Request Support
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- TERMS & CONDITIONS PAGE - FULL CONTENT -->
+<div id="terms-page" class="page">
+    <h2 class="page-title">Terms & Conditions</h2>
+    <div class="terms-content" style="max-width: 900px; margin: 0 auto; background: var(--card-bg); padding: 2rem; border-radius: 20px; border: 1px solid var(--border-color);">
+        
+        <h3 style="color: var(--primary);">1. Booking and Payment</h3>
+        <p>All bookings require a valid credit card or mobile money payment. Full payment is required at the time of booking for confirmation. A booking is only confirmed once payment has been successfully processed and you receive a confirmation email/WhatsApp message with your unique Booking ID.</p>
+        
+        <h3 style="color: var(--primary); margin-top: 1.5rem;">2. Cancellation Policy</h3>
+        <p>✅ <strong>Free cancellation</strong> up to 7 days before check-in - Full refund<br>
+        ⚠️ <strong>50% refund</strong> up to 48 hours before check-in<br>
+        ❌ <strong>No refund</strong> within 48 hours of check-in<br>
+        💰 <strong>$25 cancellation fee</strong> applies to all cancellations<br>
+        📅 Cancellations must be made through your "My Bookings" page or by contacting support.</p>
+        
+        <h3 style="color: var(--primary); margin-top: 1.5rem;">3. Check-in / Check-out Times</h3>
+        <p>• <strong>Check-in:</strong> 2:00 PM (Early check-in available from 10:00 AM for $20, subject to availability)<br>
+        • <strong>Check-out:</strong> 11:00 AM (Late check-out available until 2:00 PM for $20, subject to availability)<br>
+        • Luggage storage is available free of charge before check-in and after check-out.</p>
+        
+        <h3 style="color: var(--primary); margin-top: 1.5rem;">4. Security Deposit</h3>
+        <p>A security deposit of <strong>$50 USD</strong> is required at check-in. This deposit covers potential damages, missing items, or excessive cleaning. The deposit will be fully refunded within 7 business days of check-out after property inspection. Deductions may be made for:</p>
+        <ul>
+            <li>Damaged furniture, appliances, or fixtures</li>
+            <li>Missing items (towels, linens, electronics, etc.)</li>
+            <li>Excessive cleaning required beyond normal use</li>
+            <li>Violation of house rules (smoking inside, unauthorized guests, etc.)</li>
+        </ul>
+        
+        <h3 style="color: var(--primary); margin-top: 1.5rem;">5. Guest Responsibilities & House Rules</h3>
+        <p><strong>Guests agree to:</strong></p>
+        <ul>
+            <li>🚭 <strong>No smoking</strong> inside the rooms (fine of $100)</li>
+            <li>🎉 <strong>No parties or events</strong> without prior written approval</li>
+            <li>🔇 Respect quiet hours from <strong>10 PM to 8 AM</strong></li>
+            <li>📢 Report any damages immediately to management</li>
+            <li>👥 Maximum occupancy as per booking (no additional overnight guests without approval)</li>
+            <li>🐾 <strong>No pets</strong> allowed unless prior approval obtained</li>
+            <li>🚫 No illegal activities on the premises</li>
+            <li>♻️ Dispose of trash properly and keep the property clean</li>
+        </ul>
+        
+        <h3 style="color: var(--primary); margin-top: 1.5rem;">6. Property Amenities Rules</h3>
+        <p>• 🏊 <strong>Swimming pool hours:</strong> 7 AM - 9 PM (No lifeguard on duty - swim at your own risk)<br>
+        • 🎱 <strong>Pool table and games room:</strong> Available until 10 PM<br>
+        • 🍹 <strong>Bar service:</strong> Ends at 11 PM<br>
+        • 👤 <strong>No outside guests</strong> after 10 PM without prior approval<br>
+        • 📶 <strong>WiFi:</strong> Free for all guests (terms of use apply - no illegal downloads)</p>
+        
+        <h3 style="color: var(--primary); margin-top: 1.5rem;">7. Liability</h3>
+        <p>SONA AIRBNB UGANDA is not responsible for lost, stolen, or damaged personal items. Guests are advised to use the in-room safes provided for valuables. We are not liable for injuries sustained while using property amenities (pool, games room, etc.). Guests use all facilities at their own risk. We strongly recommend that guests have their own travel insurance.</p>
+        
+        <h3 style="color: var(--primary); margin-top: 1.5rem;">8. Privacy Policy</h3>
+        <p>Your personal information is protected and will not be shared with third parties except as required for booking confirmation, payment processing, or legal obligations. We use your data only for:</p>
+        <ul>
+            <li>Booking confirmation and communication</li>
+            <li>Service improvement and analytics</li>
+            <li>Legal and security purposes</li>
+        </ul>
+        <p>You have the right to request deletion of your data at any time.</p>
+        
+        <h3 style="color: var(--primary); margin-top: 1.5rem;">9. Force Majeure</h3>
+        <p>SONA AIRBNB UGANDA reserves the right to cancel or modify bookings due to natural disasters, government restrictions, civil unrest, pandemics, or other unforeseen circumstances beyond our control. In such events, guests will receive:</p>
+        <ul>
+            <li>Full refund of all payments made</li>
+            <li>Option to reschedule to future dates (subject to availability)</li>
+            <li>Assistance finding alternative accommodation</li>
+        </ul>
+        
+        <h3 style="color: var(--primary); margin-top: 1.5rem;">10. Age Requirement</h3>
+        <p>Guests must be at least <strong>18 years old</strong> to make a booking. Guests under 18 must be accompanied by a parent or legal guardian at all times.</p>
+        
+        <h3 style="color: var(--primary); margin-top: 1.5rem;">11. Photography and Marketing</h3>
+        <p>We may take photographs of the property for marketing purposes. Guest faces will be blurred or consent obtained. If you do not wish to be photographed, please inform staff at check-in.</p>
+        
+        <h3 style="color: var(--primary); margin-top: 1.5rem;">12. Governing Law</h3>
+        <p>These terms are governed by the laws of the Republic of Uganda. Any disputes shall be resolved in the courts of Kampala, Uganda.</p>
+        
+        <h3 style="color: var(--primary); margin-top: 1.5rem;">13. Contact Information</h3>
+        <p>For any questions, concerns, or disputes:</p>
+        <ul>
+            <li>📞 <strong>Phone:</strong> 0744824491</li>
+            <li>💬 <strong>WhatsApp:</strong> 0791825920</li>
+            <li>📧 <strong>Email:</strong> sophianalubiri@gmail.com</li>
+            <li>📍 <strong>Address:</strong> Plot 23, Kololo Heights, Kampala, Uganda</li>
+        </ul>
+        
+        <div style="margin-top: 2rem; padding: 1rem; background: rgba(255,179,71,0.15); border-radius: 10px; text-align: center;">
+            <p><strong>By making a booking with SONA AIRBNB UGANDA, you acknowledge that you have read, understood, and agree to all the terms and conditions stated above.</strong></p>
+            <p><strong>Last Updated: June 1, 2026</strong></p>
+        </div>
+    </div>
+</div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-section"><h3>SONA AIRBNB</h3><p>Luxury stays across Uganda</p></div>
+            <div class="footer-section"><h4>Quick Links</h4><ul><li><a href="#" data-page="home">Home</a></li><li><a href="#" data-page="gallery">Gallery</a></li><li><a href="#" data-page="booking">Book</a></li><li><a href="#" data-page="terms">Terms</a></li></ul></div>
+            <div class="footer-section"><h4>Contact</h4><p><i class="fab fa-whatsapp"></i> 0791825920</p><p><i class="fas fa-phone"></i> 0744824491</p></div>
+        </div>
+        <div class="footer-bottom"><p>&copy; 2026 SONA AIRBNB UGANDA</p></div>
+    </footer>
+
+    <!-- Success Modal -->
+    <div id="successModal" class="success-modal">
+        <div class="success-content">
+            <i class="fas fa-check-circle"></i>
+            <h2>✓ BOOKING CONFIRMED!</h2>
+            <div class="booking-details" id="successBookingDetails"></div>
+            <div id="roomStatusMessage"></div>
+            <button class="close-success" onclick="closeSuccessModal()">View My Bookings</button>
+        </div>
+    </div>
+
+    <!-- Auth Modal -->
+    <div id="authModal" class="modal">
+        <div class="modal-content"><span class="close">&times;</span>
+            <div id="loginForm"><h3>Login</h3><input type="email" id="loginEmail" placeholder="Email"><input type="password" id="loginPassword" placeholder="Password"><button id="doLogin" class="btn-primary">Login</button></div>
+            <div id="signupForm" style="display:none;"><h3>Sign Up</h3><input type="text" id="signupName" placeholder="Name"><input type="email" id="signupEmail" placeholder="Email"><input type="tel" id="signupPhone" placeholder="Phone"><input type="password" id="signupPassword" placeholder="Password"><button id="doSignup" class="btn-primary">Sign Up</button></div>
+        </div>
+    </div>
+
+    <!-- Chatbot Toggle Button -->
+    <button id="chatbotToggleBtn" class="chatbot-toggle">
+        <i class="fas fa-comment-dots"></i>
+    </button>
+    
+    <!-- Chatbot Window -->
+    <div id="chatbot">
+        <div id="chatHeader">
+            <i class="fas fa-robot"></i> SONA Assistant 
+            <div>
+                <span id="chatMinimize" style="cursor:pointer; margin-right:10px;">−</span>
+                <span id="chatClose" style="cursor:pointer;">✕</span>
+            </div>
+        </div>
+        <div id="chatBody">
+            <div id="chatMessages">
+                <div class="chat-message bot">
+                    <div class="message-content">
+                        👋 Hello! I'm SONA Assistant.<br>
+                        I can help you with:
+                        • Room prices & availability
+                        • Property locations & directions
+                        • Booking assistance
+                        • Cancellation policy<br><br>
+                        <strong>Need human help? Type "talk to human" or "help me"</strong>
+                    </div>
+                </div>
+            </div>
+            <div id="chatTyping" style="display:none; padding:10px; color:var(--primary);">
+                <i class="fas fa-ellipsis-h"></i> Assistant is typing...
+            </div>
+            <div class="chat-input-area">
+                <input type="text" id="chatInput" placeholder="Ask me anything...">
+                <button id="chatSend"><i class="fas fa-paper-plane"></i></button>
+            </div>
+            <div id="chatQuickReplies" class="quick-replies">
+                <button class="quick-reply">💰 Prices</button>
+                <button class="quick-reply">📍 Directions</button>
+                <button class="quick-reply">📅 Availability</button>
+                <button class="quick-reply">❓ Cancel policy</button>
+                <button class="quick-reply">👨‍💼 Talk to human</button>
+            </div>
+        </div>
+    </div>
+
+<!-- Human Support Modal -->
+<div id="humanSupportModal" class="modal">
+    <div class="modal-content" style="max-width: 500px;">
+        <span class="close" onclick="closeHumanSupportModal()">&times;</span>
+        <h3 style="color: var(--primary);">👨‍💼 Contact Support</h3>
+        <p>Our support team will get back to you shortly.</p>
+        <div class="form-group">
+            <label>Your Name</label>
+            <input type="text" id="supportName" placeholder="Enter your name">
+        </div>
+        <div class="form-group">
+            <label>Your Email</label>
+            <input type="email" id="supportEmail" placeholder="Enter your email">
+        </div>
+        <div class="form-group">
+            <label>Your Question</label>
+            <textarea id="supportQuestion" rows="3" placeholder="Describe your issue..."></textarea>
+        </div>
+        <div style="display: flex; gap: 10px;">
+            <button class="btn-primary" onclick="sendSupportRequest()">Send Message</button>
+            <button class="btn-primary" onclick="openWhatsAppSupport()">
+                <i class="fab fa-whatsapp"></i> Contact on WhatsApp
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- Directions Modal -->
+<div id="directionsModal" class="modal">
+    <div class="modal-content" style="max-width: 700px;">
+        <span class="close" onclick="closeDirectionsModal()">&times;</span>
+        <h3 style="color: var(--primary);"><i class="fas fa-map-marked-alt"></i> Get Directions</h3>
+        <div class="form-group">
+            <label>Select Property:</label>
+            <select id="directionsProperty" onchange="updateDirectionsMap()">
+                <option value="">-- Select a property --</option>
+                <option value="Kampala Executive Suite">Kampala Executive Suite</option>
+                <option value="Jinja Riverside Cottage">Jinja Riverside Cottage</option>
+                <option value="Entebbe Airport Penthouse">Entebbe Airport Penthouse</option>
+                <option value="Mbarara Modern Studio">Mbarara Modern Studio</option>
+                <option value="Gulu Peace Haven">Gulu Peace Haven</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>Your Current Location:</label>
+            <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                <button class="btn-secondary" onclick="getCurrentLocation()">
+                    <i class="fas fa-location-dot"></i> Use My Location
+                </button>
+                <input type="text" id="manualLocation" placeholder="Or enter address/city" style="flex:1;">
+                <button class="btn-primary" onclick="getDirections()">Get Directions</button>
+            </div>
+        </div>
+        <div id="directionsMap" style="height: 300px; border-radius: 15px; margin: 15px 0;"></div>
+        <div id="directionsResult" style="background: var(--bg-primary); padding: 15px; border-radius: 10px;"></div>
+        <div id="routeInstructions" style="margin-top: 15px; max-height: 200px; overflow-y: auto;"></div>
+        <div style="margin-top: 15px;">
+            <button class="btn-primary" onclick="openGoogleMaps()">
+                <i class="fab fa-google"></i> Open in Google Maps App
+            </button>
+            <button class="btn-primary" onclick="shareLocationViaWhatsApp()">
+                <i class="fab fa-whatsapp"></i> Share Location via WhatsApp
+            </button>
+        </div>
+    </div>
+</div>
+    <script src="script.js"></script>
+</body>
+</html>
