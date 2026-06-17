@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SONA AIRBNB - Reviews</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700&family=Playfair+Display:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body class="light-customer-theme">
+    <!-- Top Bar -->
+    <div class="top-bar-full">
+        <div class="currency-section">
+            <span><i class="fas fa-dollar-sign"></i> Currency:</span>
+            <select id="currencySelector">
+                <option value="USD">🇺🇸 USD ($)</option>
+                <option value="UGX">🇺🇬 UGX (Shs)</option>
+                <option value="EUR">🇪🇺 EUR (€)</option>
+                <option value="GBP">🇬🇧 GBP (£)</option>
+            </select>
+            <span class="rate-note"><i class="fas fa-sync-alt"></i> Real-time rates</span>
+        </div>
+        <div class="top-bar-actions">
+            <button id="customerThemeToggle" class="theme-toggle-customer"><i class="fas fa-moon"></i> Dark Mode</button>
+            <a href="admin.html" class="admin-link" target="_blank"><i class="fas fa-user-shield"></i> Admin</a>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo"><h1>SONA AIRBNB <span>UGANDA</span></h1></div>
+            <ul class="nav-links" id="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="gallery.html">Gallery</a></li>
+                <li><a href="videos.html">Videos</a></li>
+                <li><a href="prices.html">Prices</a></li>
+                <li><a href="bookings.html">Book</a></li>
+                <li><a href="mybookings.html">My Bookings</a></li>
+                <li><a href="profile.html">Profile</a></li>
+                <li><a href="reviews.html" class="active">Reviews</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="help&faqs.html">Help</a></li>
+                <li><a href="terms&conditions.html">Terms</a></li>
+            </ul>
+            <div class="auth-buttons">
+                <button id="loginBtn" class="btn-outline">Login</button>
+                <button id="signupBtn" class="btn-primary">Sign Up</button>
+                <span id="userGreeting" class="user-greeting"></span>
+                <button id="logoutBtn" class="btn-logout" style="display:none;">Logout</button>
+            </div>
+            <div class="hamburger" id="hamburger"><i class="fas fa-bars"></i></div>
+        </div>
+    </nav>
+
+    <main>
+        <div class="page-container">
+            <h2 class="page-title">Guest Reviews</h2>
+            <div class="review-stats">
+                <span class="big-rating">4.8</span>
+                <span class="stars">★★★★★</span>
+                <span style="display:block; color:var(--text-secondary);">Based on 156 reviews</span>
+            </div>
+
+            <div class="review-list" id="reviewList">
+                <div class="review">
+                    <div class="stars">★★★★★</div>
+                    <p>"Absolutely stunning! The room was spotless and beautifully decorated. Highly recommend!"</p>
+                    <strong>- Sarah M.</strong>
+                    <small style="display:block; color:var(--text-secondary);">Stayed at Kampala Suite</small>
+                </div>
+                <div class="review">
+                    <div class="stars">★★★★★</div>
+                    <p>"The Jinja cottage was magical. Right by the Nile with amazing views. The staff was incredibly helpful."</p>
+                    <strong>- Michael K.</strong>
+                    <small style="display:block; color:var(--text-secondary);">Stayed at Jinja Riverside Cottage</small>
+                </div>
+                <div class="review">
+                    <div class="stars">★★★★★</div>
+                    <p>"Beautiful property with great amenities. The pool and bar area were perfect for relaxing."</p>
+                    <strong>- Olivia W.</strong>
+                    <small style="display:block; color:var(--text-secondary);">Stayed at Entebbe Penthouse</small>
+                </div>
+                <div class="review">
+                    <div class="stars">★★★★☆</div>
+                    <p>"Great location and very comfortable. Would definitely stay again."</p>
+                    <strong>- David L.</strong>
+                    <small style="display:block; color:var(--text-secondary);">Stayed at Mbarara Studio</small>
+                </div>
+                <div class="review">
+                    <div class="stars">★★★★★</div>
+                    <p>"Peaceful and relaxing stay. The garden and surroundings were beautiful."</p>
+                    <strong>- Grace N.</strong>
+                    <small style="display:block; color:var(--text-secondary);">Stayed at Gulu Peace Haven</small>
+                </div>
+            </div>
+
+            <h3 style="color:var(--primary); text-align:center; margin-top:40px;">Write a Review</h3>
+            <textarea id="newReview" placeholder="Share your experience with us..." rows="4"></textarea>
+            <button id="submitReviewBtn" class="btn-primary" style="display:block; margin:15px auto;">Submit Review</button>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-section"><h3>SONA AIRBNB</h3><p>Luxury stays across Uganda</p></div>
+            <div class="footer-section"><h4>Quick Links</h4><ul><li><a href="index.html">Home</a></li><li><a href="gallery.html">Gallery</a></li><li><a href="bookings.html">Book</a></li><li><a href="terms&conditions.html">Terms</a></li></ul></div>
+            <div class="footer-section"><h4>Contact</h4><p><i class="fab fa-whatsapp"></i> 0791825920</p><p><i class="fas fa-phone"></i> 0744824491</p></div>
+        </div>
+        <div class="footer-admin-link"><a href="admin.html" class="admin-link-footer" target="_blank"><i class="fas fa-user-shield"></i> Admin Login</a></div>
+        <div class="footer-bottom"><p>&copy; 2026 SONA AIRBNB UGANDA</p></div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

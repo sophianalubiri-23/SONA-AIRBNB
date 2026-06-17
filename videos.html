@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SONA AIRBNB - Videos</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700&family=Playfair+Display:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body class="light-customer-theme">
+    <!-- Top Bar -->
+    <div class="top-bar-full">
+        <div class="currency-section">
+            <span><i class="fas fa-dollar-sign"></i> Currency:</span>
+            <select id="currencySelector">
+                <option value="USD">🇺🇸 USD ($)</option>
+                <option value="UGX">🇺🇬 UGX (Shs)</option>
+                <option value="EUR">🇪🇺 EUR (€)</option>
+                <option value="GBP">🇬🇧 GBP (£)</option>
+            </select>
+            <span class="rate-note"><i class="fas fa-sync-alt"></i> Real-time rates</span>
+        </div>
+        <div class="top-bar-actions">
+            <button id="customerThemeToggle" class="theme-toggle-customer"><i class="fas fa-moon"></i> Dark Mode</button>
+            <a href="admin.html" class="admin-link" target="_blank"><i class="fas fa-user-shield"></i> Admin</a>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo"><h1>SONA AIRBNB <span>UGANDA</span></h1></div>
+            <ul class="nav-links" id="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="gallery.html">Gallery</a></li>
+                <li><a href="videos.html" class="active">Videos</a></li>
+                <li><a href="prices.html">Prices</a></li>
+                <li><a href="bookings.html">Book</a></li>
+                <li><a href="mybookings.html">My Bookings</a></li>
+                <li><a href="profile.html">Profile</a></li>
+                <li><a href="reviews.html">Reviews</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="help&faqs.html">Help</a></li>
+                <li><a href="terms&conditions.html">Terms</a></li>
+            </ul>
+            <div class="auth-buttons">
+                <button id="loginBtn" class="btn-outline">Login</button>
+                <button id="signupBtn" class="btn-primary">Sign Up</button>
+            </div>
+            <div class="hamburger" id="hamburger"><i class="fas fa-bars"></i></div>
+        </div>
+    </nav>
+
+    <main>
+        <div class="page-container">
+            <h2 class="page-title">Video Tours - Interior Walkthroughs</h2>
+            <div class="video-grid">
+                <div class="video-card">
+                    <iframe src="https://www.youtube.com/embed/GtL1huin9EE" frameborder="0" allowfullscreen></iframe>
+                    <p>🏙️ Kampala Executive Suite Tour</p>
+                </div>
+                <div class="video-card">
+                    <iframe src="https://www.youtube.com/embed/zP0VhhDz8dQ" frameborder="0" allowfullscreen></iframe>
+                    <p>🌊 Jinja Riverside Villa Tour</p>
+                </div>
+                <div class="video-card">
+                    <iframe src="https://www.youtube.com/embed/Y7eBtzCjM4E" frameborder="0" allowfullscreen></iframe>
+                    <p>✈️ Entebbe Lakefront Room Tour</p>
+                </div>
+                <div class="video-card">
+                    <iframe src="https://www.youtube.com/embed/Nc1ePFRXR_Q" frameborder="0" allowfullscreen></iframe>
+                    <p>🏥 Mbarara Modern Studio Tour</p>
+                </div>
+                <div class="video-card">
+                    <iframe src="https://www.youtube.com/embed/voOVPcI5WLU" frameborder="0" allowfullscreen></iframe>
+                    <p>🕊️ Gulu - Pool & Games Area Tour</p>
+                </div>
+                <div class="video-card">
+                    <iframe src="https://www.youtube.com/embed/Lg7ZjCnfC24" frameborder="0" allowfullscreen></iframe>
+                    <p>🏔️ Fort Portal - Crater Lake Cottage</p>
+                </div>
+                <div class="video-card">
+                    <iframe src="https://www.youtube.com/embed/Nc1ePFRXR_Q" frameborder="0" allowfullscreen></iframe>
+                    <p>⛰️ Mbale - Mountain Escape Tour</p>
+                </div>
+                <div class="video-card">
+                    <iframe src="https://www.youtube.com/embed/GtL1huin9EE" frameborder="0" allowfullscreen></iframe>
+                    <p>🌅 Entebbe - Sunset Villa Tour</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-section"><h3>SONA AIRBNB</h3><p>Luxury stays across Uganda</p></div>
+            <div class="footer-section"><h4>Quick Links</h4><ul><li><a href="index.html">Home</a></li><li><a href="gallery.html">Gallery</a></li><li><a href="bookings.html">Book</a></li><li><a href="terms&conditions.html">Terms</a></li></ul></div>
+            <div class="footer-section"><h4>Contact</h4><p><i class="fab fa-whatsapp"></i> 0791825920</p><p><i class="fas fa-phone"></i> 0744824491</p></div>
+        </div>
+        <div class="footer-admin-link"><a href="admin.html" class="admin-link-footer" target="_blank"><i class="fas fa-user-shield"></i> Admin Login</a></div>
+        <div class="footer-bottom"><p>&copy; 2026 SONA AIRBNB UGANDA</p></div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

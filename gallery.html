@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SONA AIRBNB - Gallery</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700&family=Playfair+Display:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body class="light-customer-theme">
+    <!-- Top Bar -->
+    <div class="top-bar-full">
+        <div class="currency-section">
+            <span><i class="fas fa-dollar-sign"></i> Currency:</span>
+            <select id="currencySelector">
+                <option value="USD">🇺🇸 USD ($)</option>
+                <option value="UGX">🇺🇬 UGX (Shs)</option>
+                <option value="EUR">🇪🇺 EUR (€)</option>
+                <option value="GBP">🇬🇧 GBP (£)</option>
+            </select>
+            <span class="rate-note"><i class="fas fa-sync-alt"></i> Real-time rates</span>
+        </div>
+        <div class="top-bar-actions">
+            <button id="customerThemeToggle" class="theme-toggle-customer"><i class="fas fa-moon"></i> Dark Mode</button>
+            <a href="admin.html" class="admin-link" target="_blank"><i class="fas fa-user-shield"></i> Admin</a>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo"><h1>SONA AIRBNB <span>UGANDA</span></h1></div>
+            <ul class="nav-links" id="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="gallery.html" class="active">Gallery</a></li>
+                <li><a href="videos.html">Videos</a></li>
+                <li><a href="prices.html">Prices</a></li>
+                <li><a href="bookings.html">Book</a></li>
+                <li><a href="mybookings.html">My Bookings</a></li>
+                <li><a href="profile.html">Profile</a></li>
+                <li><a href="reviews.html">Reviews</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="help&faqs.html">Help</a></li>
+                <li><a href="terms&conditions.html">Terms</a></li>
+            </ul>
+            <div class="auth-buttons">
+                <button id="loginBtn" class="btn-outline">Login</button>
+                <button id="signupBtn" class="btn-primary">Sign Up</button>
+            </div>
+            <div class="hamburger" id="hamburger"><i class="fas fa-bars"></i></div>
+        </div>
+    </nav>
+
+    <main>
+        <div class="page-container">
+            <h2 class="page-title">Our Properties - 360° View</h2>
+
+            <div class="gallery-categories">
+                <button class="gallery-cat-btn active" data-cat="all">All</button>
+                <button class="gallery-cat-btn" data-cat="bedroom">🛏️ Bedrooms</button>
+                <button class="gallery-cat-btn" data-cat="pool">🏊 Pools</button>
+                <button class="gallery-cat-btn" data-cat="games">🎱 Games</button>
+                <button class="gallery-cat-btn" data-cat="bar">🍹 Bars</button>
+                <button class="gallery-cat-btn" data-cat="living">🏠 Living Areas</button>
+            </div>
+
+            <div class="gallery-grid" id="galleryGrid">
+                <!-- Bedrooms -->
+                <div class="gallery-item" data-cat="bedroom"><img src="https://images.pexels.com/photos/1648776/pexels-photo-1648776.jpeg?w=400&h=300&fit=crop" alt="Master Suite"><span>Master Suite - Kampala</span></div>
+                <div class="gallery-item" data-cat="bedroom"><img src="https://images.pexels.com/photos/271618/pexels-photo-271618.jpeg?w=400&h=300&fit=crop" alt="Guest Room"><span>Guest Room - Jinja</span></div>
+                <div class="gallery-item" data-cat="bedroom"><img src="https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?w=400&h=300&fit=crop" alt="Balcony Room"><span>Balcony Room - Entebbe</span></div>
+                <div class="gallery-item" data-cat="bedroom"><img src="https://images.pexels.com/photos/279746/pexels-photo-279746.jpeg?w=400&h=300&fit=crop" alt="Cozy Room"><span>Cozy Room - Gulu</span></div>
+                <!-- Pools -->
+                <div class="gallery-item" data-cat="pool"><img src="https://images.pexels.com/photos/1454806/pexels-photo-1454806.jpeg?w=400&h=300&fit=crop" alt="Infinity Pool"><span>Infinity Pool - Kampala</span></div>
+                <div class="gallery-item" data-cat="pool"><img src="https://images.pexels.com/photos/258154/pexels-photo-258154.jpeg?w=400&h=300&fit=crop" alt="Pool Area"><span>Pool Area - Entebbe</span></div>
+                <div class="gallery-item" data-cat="pool"><img src="https://images.pexels.com/photos/2102587/pexels-photo-2102587.jpeg?w=400&h=300&fit=crop" alt="Night Pool"><span>Night Pool - Jinja</span></div>
+                <div class="gallery-item" data-cat="pool"><img src="https://images.pexels.com/photos/1134176/pexels-photo-1134176.jpeg?w=400&h=300&fit=crop" alt="Pool View"><span>Pool with Lake View - Entebbe</span></div>
+                <!-- Games -->
+                <div class="gallery-item" data-cat="games"><img src="https://images.pexels.com/photos/260922/pexels-photo-260922.jpeg?w=400&h=300&fit=crop" alt="Pool Table"><span>Pool Table - Kampala</span></div>
+                <div class="gallery-item" data-cat="games"><img src="https://images.pexels.com/photos/274192/pexels-photo-274192.jpeg?w=400&h=300&fit=crop" alt="Game Room"><span>Games Room - Mbarara</span></div>
+                <div class="gallery-item" data-cat="games"><img src="https://images.pexels.com/photos/339620/pexels-photo-339620.jpeg?w=400&h=300&fit=crop" alt="Table Tennis"><span>Table Tennis - Gulu</span></div>
+                <!-- Bars -->
+                <div class="gallery-item" data-cat="bar"><img src="https://images.pexels.com/photos/1190298/pexels-photo-1190298.jpeg?w=400&h=300&fit=crop" alt="Sky Bar"><span>Sky Bar - Kampala</span></div>
+                <div class="gallery-item" data-cat="bar"><img src="https://images.pexels.com/photos/1267696/pexels-photo-1267696.jpeg?w=400&h=300&fit=crop" alt="Cocktail Bar"><span>Cocktail Bar - Jinja</span></div>
+                <div class="gallery-item" data-cat="bar"><img src="https://images.pexels.com/photos/1280965/pexels-photo-1280965.jpeg?w=400&h=300&fit=crop" alt="Lounge Bar"><span>Lounge Bar - Mbarara</span></div>
+                <!-- Living Areas -->
+                <div class="gallery-item" data-cat="living"><img src="https://images.pexels.com/photos/1571467/pexels-photo-1571467.jpeg?w=400&h=300&fit=crop" alt="Garden View"><span>Garden View - Mbarara</span></div>
+                <div class="gallery-item" data-cat="living"><img src="https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg?w=400&h=300&fit=crop" alt="Building Exterior"><span>Building Exterior</span></div>
+                <div class="gallery-item" data-cat="living"><img src="https://images.pexels.com/photos/1457842/pexels-photo-1457842.jpeg?w=400&h=300&fit=crop" alt="Spa Bathroom"><span>Spa Bathroom</span></div>
+                <div class="gallery-item" data-cat="living"><img src="https://images.pexels.com/photos/206172/pexels-photo-206172.jpeg?w=400&h=300&fit=crop" alt="Modern Kitchen"><span>Modern Kitchen</span></div>
+                <!-- Additional Properties -->
+                <div class="gallery-item" data-cat="bedroom"><img src="https://images.pexels.com/photos/258154/pexels-photo-258154.jpeg?w=400&h=300&fit=crop" alt="Living Room"><span>Living Room - Kampala</span></div>
+                <div class="gallery-item" data-cat="living"><img src="https://images.pexels.com/photos/271618/pexels-photo-271618.jpeg?w=400&h=300&fit=crop" alt="Dining Area"><span>Dining Area - Jinja</span></div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-section"><h3>SONA AIRBNB</h3><p>Luxury stays across Uganda</p></div>
+            <div class="footer-section"><h4>Quick Links</h4><ul><li><a href="index.html">Home</a></li><li><a href="gallery.html">Gallery</a></li><li><a href="bookings.html">Book</a></li><li><a href="terms&conditions.html">Terms</a></li></ul></div>
+            <div class="footer-section"><h4>Contact</h4><p><i class="fab fa-whatsapp"></i> 0791825920</p><p><i class="fas fa-phone"></i> 0744824491</p></div>
+        </div>
+        <div class="footer-admin-link"><a href="admin.html" class="admin-link-footer" target="_blank"><i class="fas fa-user-shield"></i> Admin Login</a></div>
+        <div class="footer-bottom"><p>&copy; 2026 SONA AIRBNB UGANDA</p></div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const buttons = document.querySelectorAll('.gallery-cat-btn');
+            const items = document.querySelectorAll('.gallery-item');
+
+            buttons.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    buttons.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    const cat = this.dataset.cat;
+                    items.forEach(item => {
+                        item.style.display = (cat === 'all' || item.dataset.cat === cat) ? 'block' : 'none';
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>

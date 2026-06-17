@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SONA AIRBNB UGANDA | Luxury Stays</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700&family=Playfair+Display:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+</head>
+<body class="light-customer-theme">
+    <!-- ===== TOP BAR - ABOVE NAVIGATION ===== -->
+    <div class="top-bar-full">
+        <div class="currency-section">
+            <span><i class="fas fa-dollar-sign"></i> Currency:</span>
+            <select id="currencySelector">
+                <option value="USD">🇺🇸 USD ($)</option>
+                <option value="UGX">🇺🇬 UGX (Shs)</option>
+                <option value="EUR">🇪🇺 EUR (€)</option>
+                <option value="GBP">🇬🇧 GBP (£)</option>
+            </select>
+            <span class="rate-note"><i class="fas fa-sync-alt"></i> Real-time rates</span>
+        </div>
+        <div class="top-bar-actions">
+            <button id="customerThemeToggle" class="theme-toggle-customer"><i class="fas fa-moon"></i> Dark Mode</button>
+            <a href="admin.html" class="admin-link" target="_blank"><i class="fas fa-user-shield"></i> Admin</a>
+        </div>
+    </div>
+
+    <!-- ===== NAVIGATION - BELOW TOP BAR ===== -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo"><h1>SONA AIRBNB <span>UGANDA</span></h1></div>
+            <ul class="nav-links" id="nav-links">
+                <li><a href="index.html" class="active">Home</a></li>
+                <li><a href="gallery.html">Gallery</a></li>
+                <li><a href="videos.html">Videos</a></li>
+                <li><a href="prices.html">Prices</a></li>
+                <li><a href="bookings.html">Book</a></li>
+                <li><a href="mybookings.html">My Bookings</a></li>
+                <li><a href="profile.html">Profile</a></li>
+                <li><a href="reviews.html">Reviews</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="help&faqs.html">Help</a></li>
+                <li><a href="terms&conditions.html">Terms</a></li>
+            </ul>
+            <div class="auth-buttons">
+                <button id="loginBtn" class="btn-outline">Login</button>
+                <button id="signupBtn" class="btn-primary">Sign Up</button>
+                <span id="userGreeting" class="user-greeting"></span>
+                <button id="logoutBtn" class="btn-logout" style="display:none;">Logout</button>
+            </div>
+            <div class="hamburger" id="hamburger"><i class="fas fa-bars"></i></div>
+        </div>
+    </nav>
+
+    <!-- ===== MAIN CONTENT - BELOW NAVIGATION ===== -->
+    <main>
+        <!-- Hero Slideshow -->
+        <section class="hero-slideshow">
+            <div class="slideshow-container">
+                <div class="slide fade">
+                    <img src="https://images.pexels.com/photos/1648776/pexels-photo-1648776.jpeg?w=1600&h=700&fit=crop" alt="Luxury bedroom">
+                    <div class="slide-caption">Luxurious King Suite - Kampala</div>
+                </div>
+                <div class="slide fade">
+                    <img src="https://images.pexels.com/photos/258154/pexels-photo-258154.jpeg?w=1600&h=700&fit=crop" alt="Modern living room">
+                    <div class="slide-caption">Spacious Living Area - Jinja</div>
+                </div>
+                <div class="slide fade">
+                    <img src="https://images.pexels.com/photos/1454806/pexels-photo-1454806.jpeg?w=1600&h=700&fit=crop" alt="Swimming pool">
+                    <div class="slide-caption">Infinity Pool - Entebbe</div>
+                </div>
+                <div class="slide fade">
+                    <img src="https://images.pexels.com/photos/260922/pexels-photo-260922.jpeg?w=1600&h=700&fit=crop" alt="Pool table">
+                    <div class="slide-caption">Pool Table & Games Room</div>
+                </div>
+                <div class="slide fade">
+                    <img src="https://images.pexels.com/photos/1190298/pexels-photo-1190298.jpeg?w=1600&h=700&fit=crop" alt="Bar">
+                    <div class="slide-caption">Sky Bar with City View</div>
+                </div>
+                <a class="prev" onclick="changeSlide(-1)">&#10094;</a>
+                <a class="next" onclick="changeSlide(1)">&#10095;</a>
+            </div>
+            <div class="hero-text">
+                <h2>Experience Uganda Like Never Before</h2>
+                <p>Premium Airbnbs in Kampala, Jinja, Entebbe, Mbarara, Gulu & more</p>
+                <button class="btn-large" onclick="location.href='bookings.html'">Book Your Stay Now</button>
+            </div>
+        </section>
+
+        <!-- Features -->
+        <section class="features">
+            <div class="feature-card"><i class="fas fa-map-marker-alt"></i><h3>7+ Cities</h3><p>Across Uganda</p></div>
+            <div class="feature-card"><i class="fas fa-wifi"></i><h3>Free High-Speed WiFi</h3></div>
+            <div class="feature-card"><i class="fas fa-concierge-bell"></i><h3>24/7 Support</h3></div>
+            <div class="feature-card"><i class="fas fa-shield-alt"></i><h3>Verified Properties</h3></div>
+            <div class="feature-card"><i class="fas fa-swimming-pool"></i><h3>Swimming Pools</h3></div>
+            <div class="feature-card"><i class="fas fa-glass-cheers"></i><h3>On-site Bars</h3></div>
+        </section>
+
+        <!-- Gallery Preview -->
+        <section class="home-gallery-preview">
+            <h2 class="section-title">Our Properties - 360° View</h2>
+            <div class="gallery-grid">
+                <div class="gallery-item"><img src="https://images.pexels.com/photos/1648776/pexels-photo-1648776.jpeg?w=400&h=300&fit=crop" alt="Master Suite"><span>Master Suite - Kampala</span></div>
+                <div class="gallery-item"><img src="https://images.pexels.com/photos/271618/pexels-photo-271618.jpeg?w=400&h=300&fit=crop" alt="Guest Room"><span>Guest Room - Jinja</span></div>
+                <div class="gallery-item"><img src="https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?w=400&h=300&fit=crop" alt="Balcony Room"><span>Balcony Room - Entebbe</span></div>
+                <div class="gallery-item"><img src="https://images.pexels.com/photos/279746/pexels-photo-279746.jpeg?w=400&h=300&fit=crop" alt="Cozy Room"><span>Cozy Room - Gulu</span></div>
+                <div class="gallery-item"><img src="https://images.pexels.com/photos/1454806/pexels-photo-1454806.jpeg?w=400&h=300&fit=crop" alt="Infinity Pool"><span>Infinity Pool - Kampala</span></div>
+                <div class="gallery-item"><img src="https://images.pexels.com/photos/258154/pexels-photo-258154.jpeg?w=400&h=300&fit=crop" alt="Pool Area"><span>Pool Area - Entebbe</span></div>
+                <div class="gallery-item"><img src="https://images.pexels.com/photos/260922/pexels-photo-260922.jpeg?w=400&h=300&fit=crop" alt="Pool Table"><span>Pool Table - Kampala</span></div>
+                <div class="gallery-item"><img src="https://images.pexels.com/photos/1190298/pexels-photo-1190298.jpeg?w=400&h=300&fit=crop" alt="Sky Bar"><span>Sky Bar - Kampala</span></div>
+            </div>
+            <div style="text-align:center; margin-top:20px;">
+                <button class="btn-primary" onclick="location.href='gallery.html'">View Full Gallery →</button>
+            </div>
+        </section>
+    </main>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>SONA AIRBNB</h3>
+                <p>Luxury stays across Uganda</p>
+                <div class="social-icons" style="margin-top:10px;">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="gallery.html">Gallery</a></li>
+                    <li><a href="bookings.html">Book</a></li>
+                    <li><a href="terms&conditions.html">Terms</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Contact</h4>
+                <p><i class="fab fa-whatsapp"></i> 0791825920</p>
+                <p><i class="fas fa-phone"></i> 0744824491</p>
+            </div>
+        </div>
+        <div class="footer-admin-link">
+            <a href="admin.html" class="admin-link-footer" target="_blank"><i class="fas fa-user-shield"></i> Admin Login</a>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 SONA AIRBNB UGANDA. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- ===== MODALS ===== -->
+    <!-- Auth Modal -->
+    <div id="authModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="document.getElementById('authModal').style.display='none'">&times;</span>
+            <div id="loginForm">
+                <h3 style="color:var(--primary);">Login</h3>
+                <input type="email" id="loginEmail" placeholder="Email">
+                <input type="password" id="loginPassword" placeholder="Password">
+                <button id="doLogin" class="btn-primary" style="width:100%;">Login</button>
+            </div>
+            <div id="signupForm" style="display:none;">
+                <h3 style="color:var(--primary);">Sign Up</h3>
+                <input type="text" id="signupName" placeholder="Full Name">
+                <input type="email" id="signupEmail" placeholder="Email">
+                <input type="tel" id="signupPhone" placeholder="Phone">
+                <input type="password" id="signupPassword" placeholder="Password">
+                <button id="doSignup" class="btn-primary" style="width:100%;">Sign Up</button>
+            </div>
+            <p style="margin-top:10px;text-align:center;color:var(--text-secondary);">
+                <span id="switchAuth">Don't have an account? <a href="#" style="color:var(--primary);">Sign Up</a></span>
+            </p>
+        </div>
+    </div>
+
+    <!-- Success Modal -->
+    <div id="successModal" class="success-modal">
+        <div class="success-content">
+            <i class="fas fa-check-circle"></i>
+            <h2>✓ BOOKING CONFIRMED!</h2>
+            <div class="booking-details" id="successBookingDetails"></div>
+            <div id="roomStatusMessage"></div>
+            <button class="close-success" onclick="closeSuccessModal()">View My Bookings</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
